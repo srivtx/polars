@@ -124,15 +124,6 @@ impl RecordBatchEncoder {
                     let message_num_bytes = ipc_message.len();
                     let arrow_data_num_bytes = arrow_data.len();
 
-                    if {
-                        static V: std::sync::LazyLock<bool> =
-                            std::sync::LazyLock::new(|| std::env::var("POLARS_DBG").is_ok());
-                        *V
-                    } {
-                        dbg!(ipc_message.stats());
-                        dbg!(arrow_data.stats());
-                    }
-
                     Ok(IpcBatch {
                         batch_type: IpcBatchType::Record,
                         num_rows: height as IdxSize,
